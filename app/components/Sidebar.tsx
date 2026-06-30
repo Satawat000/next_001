@@ -19,10 +19,6 @@ const menus = [
     name: "Contact",
     href: "/contact",
   },
-  {
-    name: "Posts",
-    href: "/posts",
-  },
 ];
 
 function Sidebar() {

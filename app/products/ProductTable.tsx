@@ -5,6 +5,7 @@ import Link from "next/link";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ProductType } from "./types/product";
 import EditProductDialog from "./components/EditProductDialog";
+import ConfirmDeletedDialog from "./components/ConfirmDeletedDialog";
 
 // type Product = {
 //   id: number;
@@ -19,10 +20,16 @@ type Props = {
 
 function ProductTable({ products, setProducts }: Props) {
   const [openEdit, setOpenEdit] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
   const [formData, setFormData] = useState<ProductType | null>(null);
   const handleEdit = (row: ProductType) => {
     setFormData({ ...row });
     setOpenEdit(true);
+  };
+
+  const handbleDeleted = (row: ProductType) => {
+    setFormData({ ...row });
+    setOpenDelete(true);
   };
 
   const handleDelete = async (id: number) => {
@@ -36,6 +43,7 @@ function ProductTable({ products, setProducts }: Props) {
       const deletedProduct = await res.json();
       setProducts((prev) => prev.filter((item) => item.id !== id));
       console.log(deletedProduct);
+      setOpenDelete(false);
     } catch (error) {
       console.log(error);
     }
@@ -97,7 +105,7 @@ function ProductTable({ products, setProducts }: Props) {
             Edit
           </button>
           <button
-            onClick={() => handleDelete(params.row.id)}
+            onClick={() => handbleDeleted(params.row)}
             className="flex h-8 flex-1 items-center justify-center rounded bg-red-500 text-white"
           >
             Delete
@@ -136,6 +144,12 @@ function ProductTable({ products, setProducts }: Props) {
         open={openEdit}
         onClose={() => setOpenEdit(false)}
         onSave={handleSave}
+      />
+      <ConfirmDeletedDialog
+        id={formData?.id || 0}
+        open={openDelete}
+        onClose={() => setOpenDelete(false)}
+        onSave={() => formData?.id !== undefined && handleDelete(formData.id)}
       />
     </div>
   );
