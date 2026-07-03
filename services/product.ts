@@ -13,9 +13,17 @@ export async function getProductById(id: number) {
   return product;
 }
 
-export async function createProduct(product: ProductType) {
-  products.push(product);
-  return product;
+export async function createProduct(product: Omit<ProductType, "id">) {
+  const nextId =
+    products.length > 0 ? Math.max(...products.map((p) => p.id)) + 1 : 1;
+
+  const newProduct: ProductType = {
+    ...product,
+    id: nextId,
+  };
+
+  products.push(newProduct);
+  return newProduct;
 }
 
 export async function updateProduct(id: number, updatedProduct: ProductType) {

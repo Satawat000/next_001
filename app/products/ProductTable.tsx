@@ -6,6 +6,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { ProductType } from "./types/product";
 import EditProductDialog from "./components/EditProductDialog";
 import ConfirmDeletedDialog from "./components/ConfirmDeletedDialog";
+import AddProductDialog from "./components/AddProductDialog";
 
 // type Product = {
 //   id: number;
@@ -21,6 +22,7 @@ type Props = {
 function ProductTable({ products, setProducts }: Props) {
   const [openEdit, setOpenEdit] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
+  const [openAdd, setOpenAdd] = useState(false);
   const [formData, setFormData] = useState<ProductType | null>(null);
   const handleEdit = (row: ProductType) => {
     setFormData({ ...row });
@@ -32,7 +34,33 @@ function ProductTable({ products, setProducts }: Props) {
     setOpenDelete(true);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleAdd = () => {
+    setFormData({
+      title: "",
+      price: 0,
+    } as ProductType);
+    setOpenAdd(true);
+  };
+
+  const callCreateService = async () => {
+    try {
+      const res = await fetch(`http://localhost:3000/products/api/products`, {
+        method: "POST",
+        headers: {
+          "Content-Tye": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const updateProduct = await res.json();
+      setProducts((prev) => [...prev, updateProduct]);
+      setOpenAdd(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const callDeleteService = async (id: number) => {
     try {
       const res = await fetch(
         `http://localhost:3000/products/api/products/${id}`,
@@ -41,6 +69,7 @@ function ProductTable({ products, setProducts }: Props) {
         },
       );
       const deletedProduct = await res.json();
+
       setProducts((prev) => prev.filter((item) => item.id !== id));
       console.log(deletedProduct);
       setOpenDelete(false);
@@ -49,7 +78,7 @@ function ProductTable({ products, setProducts }: Props) {
     }
   };
 
-  const handleSave = async () => {
+  const callEditService = async () => {
     if (!formData) return;
     try {
       console.log(formData);
@@ -71,7 +100,7 @@ function ProductTable({ products, setProducts }: Props) {
       setProducts((prev) =>
         prev.map((item) => (item.id === updateProduct.id ? formData : item)),
       );
-      console.log(updateProduct);
+
       setOpenEdit(false);
     } catch (error) {
       console.log(error);
@@ -116,7 +145,16 @@ function ProductTable({ products, setProducts }: Props) {
   ];
 
   return (
-    <div className="">
+    <div className="flex flex-col">
+      <div className="flex justify-end mb-4">
+        <button
+          onClick={handleAdd}
+          className=" bg-green-500 text-white px-4 py-2 rounded w-32 text-center"
+        >
+          Add Product
+        </button>
+      </div>
+
       <DataGrid
         hideFooterSelectedRowCount
         rows={products}
@@ -138,18 +176,28 @@ function ProductTable({ products, setProducts }: Props) {
           },
         }}
       />
+
       <EditProductDialog
         formData={formData}
         setFormData={setFormData}
         open={openEdit}
         onClose={() => setOpenEdit(false)}
-        onSave={handleSave}
+        onSave={callEditService}
       />
       <ConfirmDeletedDialog
         id={formData?.id || 0}
         open={openDelete}
         onClose={() => setOpenDelete(false)}
-        onSave={() => formData?.id !== undefined && handleDelete(formData.id)}
+        onSave={() =>
+          formData?.id !== undefined && callDeleteService(formData.id)
+        }
+      />
+      <AddProductDialog
+        open={openAdd}
+        formData={formData}
+        setFormData={setFormData}
+        onClose={() => setOpenAdd(false)}
+        onSave={callCreateService}
       />
     </div>
   );
