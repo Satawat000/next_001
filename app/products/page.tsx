@@ -18,7 +18,9 @@ export default async function ProductsPage() {
 
   return (
     <main className="p-8">
-      <h1 className="mb-4 text-3xl font-bold text-black">List of Products</h1>
+      <h1 className=" text-5xl font-semibold text-[#94A3B8]">
+        List of Products
+      </h1>
 
       <ProductTableWrapper initialProducts={products} />
     </main>

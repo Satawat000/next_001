@@ -55,7 +55,7 @@ function Navbar() {
             id="search"
             type="text"
             placeholder="Search"
-            className="bg-white rounded-2xl py-3  px-2  text-base text-black font-semibold min-w-xl placeholder:text-gray-500 focus:outline-none rounded-e-none"
+            className="bg-white rounded-2xl w-full  px-2  text-base text-black font-semibold min-w-xl placeholder:text-gray-500 focus:outline-none rounded-e-none"
           />
           <button
             className="bg-blue-500 rounded-2xl py-1.5  px-2.5 text-base text-white  rounded-bl-none rounded-s-none font-semibold"
@@ -67,17 +67,17 @@ function Navbar() {
           </button>
         </div>
         <div className="flex gap-4 p-4 w-1/4">
-          {btnCircles.map((btn) => (
+          {/* {btnCircles.map((btn) => (
             <button
               key={btn.href}
               className={`flex items-center justify-center w-12 h-12 rounded-full text-white ${btn.color}`}
             >
               {btn.name}
             </button>
-          ))}
+          ))} */}
         </div>
       </div>
-      <div className="text-black font-bold text-2xl p-2 text-center">
+      <div className="text-white font-bold text-2xl p-2 text-center">
         List Management
       </div>
       <div className="flex gap-4 p-2 w-full justify-center">

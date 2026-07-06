@@ -149,7 +149,7 @@ function ProductTable({ products, setProducts }: Props) {
       <div className="flex justify-end mb-4">
         <button
           onClick={handleAdd}
-          className=" bg-green-500 text-white px-4 py-2 rounded w-32 text-center"
+          className=" bg-[#3f1899] text-white px-4 py-2 rounded w-32 text-center"
         >
           Add Product
         </button>
@@ -173,6 +173,24 @@ function ProductTable({ products, setProducts }: Props) {
           },
           "& .MuiDataGrid-columnHeader:focus-within": {
             outline: "none !important",
+          },
+          "& .MuiDataGrid-columnHeaderTitle": {
+            fontWeight: 600,
+          },
+          color: "#fff",
+          // สีกรอบรอบนอกทั้งตาราง
+          border: "1px solid #1f2022", // กรอบนอกสุดทั้งตาราง
+
+          "& .MuiDataGrid-columnHeaders": {
+            borderBottom: "none", // header ↔ content
+          },
+
+          "& .MuiDataGrid-footerContainer": {
+            borderTop: "1px solid #1f2022", // content ↔ footer
+          },
+
+          "& .MuiDataGrid-cell": {
+            borderColor: "#1f2022", // เส้นแบ่ง cell/row ปกติ
           },
         }}
       />

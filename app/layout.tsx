@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { AppRouterCacheProvider } from "@mui/material-nextjs/v15-appRouter";
+import ThemeRegistry from "./ThemeRegistry";
 
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -28,18 +28,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
       <body>
-        <AppRouterCacheProvider>
+        <ThemeRegistry>
           <div className="min-h-full flex flex-col">
             <Navbar />
-
             <main className="flex-1 p-6">
-              <div className="m-4 bg-white rounded-md p-4">{children}</div>
+              <div className="rounded-3xl border border-white/10  from-white/10 via-white/5 to-transparent backdrop-blur-xl shadow-[0_8px_40px_rgba(0,0,0,0.45)] transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.18)]">
+                {children}
+              </div>
             </main>
           </div>
-        </AppRouterCacheProvider>
+        </ThemeRegistry>
       </body>
     </html>
   );
