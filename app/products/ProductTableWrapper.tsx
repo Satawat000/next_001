@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import ProductTable from "./ProductTable";
-import { ProductType } from "./types/product";
+import { ProductType } from "../../types/product";
 
 type Props = {
   initialProducts: ProductType[];

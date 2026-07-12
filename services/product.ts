@@ -1,4 +1,4 @@
-import { ProductType } from "@/app/products/types/product";
+import { ProductType } from "@/types/product";
 import { products } from "@/data/productList";
 
 export async function getProducts() {

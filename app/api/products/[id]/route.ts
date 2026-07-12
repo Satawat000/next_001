@@ -3,7 +3,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "@/services/product";
-import { ProductType } from "@/app/products/types/product";
+import { ProductType } from "@/types/product";
 type Props = {
   params: Promise<{
     id: string;

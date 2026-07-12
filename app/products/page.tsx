@@ -1,8 +1,8 @@
-import { ProductType } from "./types/product";
+import { ProductType } from "../../types/product";
 import ProductTableWrapper from "./ProductTableWrapper";
 
 async function getProducts(): Promise<ProductType[]> {
-  const response = await fetch("http://localhost:3000/products/api/products", {
+  const response = await fetch("http://localhost:3000/api/products", {
     cache: "no-store",
   });
 

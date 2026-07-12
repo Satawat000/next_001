@@ -16,8 +16,8 @@ const menus = [
     href: "/about",
   },
   {
-    name: "Contact",
-    href: "/contact",
+    name: "Users",
+    href: "/users",
   },
 ];
 

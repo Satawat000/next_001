@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogActions,
 } from "@mui/material";
-import { ProductType } from "../types/product";
+import { ProductType } from "../../../types/product";
 
 type Props = {
   open: boolean;

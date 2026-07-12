@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import { ProductType } from "./types/product";
+import { ProductType } from "../../types/product";
 import EditProductDialog from "./components/EditProductDialog";
 import ConfirmDeletedDialog from "./components/ConfirmDeletedDialog";
 import AddProductDialog from "./components/AddProductDialog";
@@ -63,7 +63,7 @@ function ProductTable({ products, setProducts }: Props) {
   const callDeleteService = async (id: number) => {
     try {
       const res = await fetch(
-        `http://localhost:3000/products/api/products/${id}`,
+        `http://localhost:3000/api/products/${id}`,
         {
           method: "DELETE",
         },
@@ -83,7 +83,7 @@ function ProductTable({ products, setProducts }: Props) {
     try {
       console.log(formData);
       const res = await fetch(
-        `http://localhost:3000/products/api/products/${formData.id}`,
+        `http://localhost:3000/api/products/${formData.id}`,
         {
           method: "PUT",
           headers: {
