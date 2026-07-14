@@ -178,8 +178,8 @@ function ProductTable({ products, setProducts }: Props) {
             fontWeight: 600,
           },
           color: "#fff",
-          // สีกรอบรอบนอกทั้งตาราง
-          border: "1px solid #1f2022", // กรอบนอกสุดทั้งตาราง
+          
+          border: "1px solid #1f2022", 
 
           "& .MuiDataGrid-columnHeaders": {
             borderBottom: "none", // header ↔ content
@@ -190,7 +190,7 @@ function ProductTable({ products, setProducts }: Props) {
           },
 
           "& .MuiDataGrid-cell": {
-            borderColor: "#1f2022", // เส้นแบ่ง cell/row ปกติ
+            borderColor: "#1f2022", 
           },
         }}
       />

@@ -5,7 +5,7 @@ import Sidebar from "./Sidebar";
 const menus = [
   {
     name: "Dashboard",
-    href: "/",
+    href: "/dashboard",
   },
   {
     name: "Products",
@@ -47,10 +47,23 @@ function Navbar() {
   return (
     <nav className="p-4 ">
       <div className="flex">
-        <div className="p-4 w-1/4">
+        <div className="p-4">
           <Sidebar />
         </div>
-        <div className="flex p-4 w-2/4">
+        <div className="flex p-4 gap-1">
+          {menus.map((menu)=>(
+            <div key={menu.href} className="-skew-x-12 p-2 px-4 border border-white/10 bg-slate-950/60 backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-blue-400/30 hover:shadow-[0_0_40px_rgba(59,130,246,0.18)]">
+              <span className="inline-block -skew-x-12 text-white font-bold">
+                <Link href={menu.href}>
+                  {menu.name}
+                </Link>
+              </span>
+            </div>
+
+          ))}
+
+        </div>
+        {/* <div className="flex p-4 w-2/4">
           <input
             id="search"
             type="text"
@@ -67,30 +80,17 @@ function Navbar() {
           </button>
         </div>
         <div className="flex gap-4 p-4 w-1/4">
-          {/* {btnCircles.map((btn) => (
+          {btnCircles.map((btn) => (
             <button
               key={btn.href}
               className={`flex items-center justify-center w-12 h-12 rounded-full text-white ${btn.color}`}
             >
               {btn.name}
             </button>
-          ))} */}
-        </div>
+          ))}
+        </div> */}
       </div>
-      <div className="text-white font-bold text-2xl p-2 text-center">
-        List Management
-      </div>
-      <div className="flex gap-4 p-2 w-full justify-center">
-        {menus.map((menu) => (
-          <Link
-            key={menu.href}
-            href={menu.href}
-            className="bg-[#253D90] text-white w-36 text-center font-semibold rounded-md p-2 transition hover:bg-yellow-500"
-          >
-            {menu.name}
-          </Link>
-        ))}
-      </div>
+      
     </nav>
   );
 }
